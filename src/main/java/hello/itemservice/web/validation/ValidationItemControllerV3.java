@@ -47,9 +47,17 @@ public class ValidationItemControllerV3 {
                             RedirectAttributes redirectAttributes,
                             Model model) {
 
+        if (item.getPrice() != null && item.getQuantity() != null) {
+            int resultPrice = item.getPrice() * item.getQuantity();
+            if (resultPrice < 10000) {
+                bindingResult.reject("totalPriceMin", new Object[]{10000,
+                        resultPrice}, null);
+            }
+        }
+
         // 검증에 실패하면 다시 입력 폼으로
-        if(bindingResult.hasErrors()){
-            log.info("errors = {}",bindingResult);
+        if (bindingResult.hasErrors()) {
+            log.info("errors = {}", bindingResult);
             return "/validation/v3/addForm";
         }
 
