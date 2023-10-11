@@ -17,9 +17,9 @@ import javax.validation.constraints.NotNull;
 )
  **/
 @Data
-
 public class Item {
 
+    @NotNull // 수정 요구사항(수정할 떄 Id값 필수)
     private Long id;
 
     @NotBlank(message = "공백을 입력할 수 없습니다.")
@@ -30,7 +30,7 @@ public class Item {
     private Integer price;
 
     @NotNull
-    @Max(9999)
+    //@Max(9999) // 수정 요구사항(수정 시 수량 무제한)
     private Integer quantity;
 
     public Item() {
